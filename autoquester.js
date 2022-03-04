@@ -31,10 +31,10 @@ async function revealRewards(ids){
 const gasEstimate = await questContract.methods.revealTokenQuests(ids).estimateGas({from:myAddress})
 questContract.methods.revealTokenQuests(
 ids).send({
-		from: myAddress,
-		gasPrice: await web3.eth.getGasPrice(),
-		gas = gasEstimate
-		}).then(console.log)
+	from: myAddress,
+	gasPrice: await web3.eth.getGasPrice(),		
+	gas = gasEstimate
+	}).then(console.log)
 }
 
 
@@ -45,20 +45,33 @@ ids,
 difficulties,
 loops
 ).send({
-		from: myAddress,
-		gasPrice: await web3.eth.getGasPrice(),
-		gas = gasEstimate
-		}).then(console.log)
+	from: myAddress,
+	gasPrice: await web3.eth.getGasPrice(),
+	gas = gasEstimate
+	}).then(console.log)
 }
 
 
 async function main(ids, difficulties, loops){
-		revealRewards(ids)
-		console.log("rewards revealing")
-		await delay(50000);
-		console.log("waiting for tx to confirm")
-		startQuests(ids, difficulties,loops)
-		console.log("starting quests")
+if(ready(ids) == 0){
+	revealRewards(ids)
+	console.log("rewards revealing")
+	await delay(50000);
+	console.log("waiting for tx to confirm")
+	startQuests(ids, difficulties,loops)
+	console.log("starting quests")
+}
+}
+async function ready(ids){
+var count = 0;
+var index = 0;
+while(counter < ids.length)
+questContract.methods.isQuestReadyToReveal(ids[index]).call()
+.then(console.log)
+	if(console.log == false)
+		count++;
+	index++;
+	
 }
 
 main(ids, difficulties, loops)
