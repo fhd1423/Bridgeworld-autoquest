@@ -6,7 +6,7 @@ const abi = `[{"anonymous":false,"inputs":[{"indexed":true,"internalType":"addre
 
 const web3 = new Web3('https://arb1.arbitrum.io/rpc');
 
-YOUR_PRIVATE_KEY = ('8bd768c81b6962ea066cc2400cf020b9c94b9e77bd853974b42ee7207b03800d')
+YOUR_PRIVATE_KEY = ('')
 
 let arbMasterAccount = web3.eth.accounts.privateKeyToAccount(YOUR_PRIVATE_KEY);
 web3.eth.accounts.wallet.add(arbMasterAccount);
